@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HYCWEB.AS_WORKTIME>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+ 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_PSN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_USERID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_STIME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_ETIME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_HOURS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_UPDATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AS_UPDUSER)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_PSN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_USERID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_STIME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_ETIME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_HOURS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_UPDATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AS_UPDUSER)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ASS_SN }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ASS_SN }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ASS_SN })
+        </td>
+    </tr>
+}
+
+</table>

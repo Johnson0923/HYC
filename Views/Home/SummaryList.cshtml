@@ -1,0 +1,83 @@
+﻿@model IEnumerable<HYCWEB.Models.ViewModels.vEmployeeListSummary>
+
+@{
+    ViewBag.Title = "SummaryList";
+}
+
+<h2>SummaryList</h2>
+
+<div>
+    @Html.ActionLink("Create New", "Create")
+
+    @using (Html.BeginForm("SummaryList", "Home"))
+    {
+
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label for="usr">員工編號:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="EmployeeName" name="EmployeeName">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary ">查詢</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.as_psn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.as_workmonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.as_totaltime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.as_basetime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.as_timegap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.conversion)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.as_psn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.as_workmonth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.as_totaltime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.as_basetime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.as_timegap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.conversion)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<HYCWEB.Models.ViewModels.vEmployeeWorktime>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+    <div>
+        @*Html.ActionLink("Create New", "Create")*@
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">跳窗</button>
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Link 1</a>
+                <a class="dropdown-item" href="#">Link 2</a>
+            </div>
+        </div>
+       
+        @using (Html.BeginForm("List", "Home"))
+        {
+
+            @*@Html.TextBox("EmployeeName")<br />
+            @Html.TextBox("StartYYMM")
+            <button type="submit" class="btn btn-primary">查詢</button>*@
+            @* <input type="text" class="form-control" id="EmployeeName" name="EmployeeName"/>
+            <input type="text" class="form-control" id="StartYYMM" name="StartYYMM"/>
+            <input type="submit" class="btn btn-primary" value="查詢">*@
+            <div class="container">
+                <form>
+                    <div class="row">
+                        <div class="col-md-2 text-right">
+                            <label for="usr">員工編號:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="EmployeeName" name="EmployeeName">
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <label for="usr">月份:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="StartYYMM" name="StartYYMM">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary ">查詢</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+
+    </div>
+<div class="table-responsive">
+    <table class="table table-bordered" id="tableSysWork">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AS_PSN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AS_USERID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AS_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AS_STIME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AS_ETIME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AS_HOURS)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AS_PSN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AS_USERID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AS_DATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AS_STIME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AS_ETIME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHOWTIME)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ASS_SN }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ASS_SN }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ASS_SN })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div id="myModal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="cursor:move">
+                <h4 class="modal-title">Modal Header</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer" style="cursor:move">
+                <button type="button" class="btn btn-primary myBtnGroup2" onclick="return doAddUpdEquip();">確定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#tableSysWork').DataTable();
+        $(".modal").on('show.bs.modal', function () {
+            $.ajax({
+                type: 'post',
+                url: "@Url.Action("ac", "Home")" ,
+                data: { TabName: '111' },
+                success: function (resp) {
+                    $(".modal-body").html(resp);
+                    //$("#divPane").find('.myContent').html(resp);
+                }
+            });
+        });
+
+    });
+
+</script>

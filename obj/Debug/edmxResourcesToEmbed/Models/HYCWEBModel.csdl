@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HYCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AS_MEMBER">
+    <Key>
+      <PropertyRef Name="AS_PSN" />
+    </Key>
+    <Property Name="AS_PSN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AS_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AS_STARTDATE" Type="Int32" />
+    <Property Name="AS_ENDDATE" Type="Int32" />
+    <Property Name="AS_SALARY" Type="Int32" />
+    <Property Name="AS_OFFICEPHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AS_LEAVEDATE" Type="Int32" />
+    <Property Name="AS_UPDDATE" Type="DateTime" Precision="3" />
+    <Property Name="AS_UPDUSER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AS_WORKTIME">
+    <Key>
+      <PropertyRef Name="ASS_SN" />
+    </Key>
+    <Property Name="ASS_SN" Type="Int32" Nullable="false" />
+    <Property Name="AS_PSN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AS_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AS_DATE" Type="Int32" Nullable="false" />
+    <Property Name="AS_CLASSTYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="AS_STIME" Type="Int32" Nullable="false" />
+    <Property Name="AS_ETIME" Type="Int32" Nullable="false" />
+    <Property Name="AS_HOURS" Type="Double" />
+    <Property Name="AS_UPDATE" Type="DateTime" Precision="3" />
+    <Property Name="AS_UPDUSER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AS_SALARY">
+    <Key>
+      <PropertyRef Name="AS_USERID" />
+    </Key>
+    <Property Name="AS_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AS_WORKDAY" Type="Int32" />
+    <Property Name="AS_ACTUAL" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="AS_BASIC" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="AS_GAP" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityContainer Name="HYCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AS_MEMBER" EntityType="Self.AS_MEMBER" />
+    <EntitySet Name="AS_WORKTIME" EntityType="Self.AS_WORKTIME" />
+    <EntitySet Name="AS_SALARY" EntityType="Self.AS_SALARY" />
+  </EntityContainer>
+</Schema>

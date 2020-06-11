@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HYCModelStoreContainer" CdmEntityContainer="HYCEntities">
+    <EntitySetMapping Name="AS_MEMBER">
+      <EntityTypeMapping TypeName="HYCModel.AS_MEMBER">
+        <MappingFragment StoreEntitySet="AS_MEMBER">
+          <ScalarProperty Name="AS_PSN" ColumnName="AS_PSN" />
+          <ScalarProperty Name="AS_NAME" ColumnName="AS_NAME" />
+          <ScalarProperty Name="AS_STARTDATE" ColumnName="AS_STARTDATE" />
+          <ScalarProperty Name="AS_ENDDATE" ColumnName="AS_ENDDATE" />
+          <ScalarProperty Name="AS_SALARY" ColumnName="AS_SALARY" />
+          <ScalarProperty Name="AS_OFFICEPHONE" ColumnName="AS_OFFICEPHONE" />
+          <ScalarProperty Name="AS_LEAVEDATE" ColumnName="AS_LEAVEDATE" />
+          <ScalarProperty Name="AS_UPDDATE" ColumnName="AS_UPDDATE" />
+          <ScalarProperty Name="AS_UPDUSER" ColumnName="AS_UPDUSER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AS_WORKTIME">
+      <EntityTypeMapping TypeName="HYCModel.AS_WORKTIME">
+        <MappingFragment StoreEntitySet="AS_WORKTIME">
+          <ScalarProperty Name="ASS_SN" ColumnName="ASS_SN" />
+          <ScalarProperty Name="AS_PSN" ColumnName="AS_PSN" />
+          <ScalarProperty Name="AS_USERID" ColumnName="AS_USERID" />
+          <ScalarProperty Name="AS_DATE" ColumnName="AS_DATE" />
+          <ScalarProperty Name="AS_CLASSTYPE" ColumnName="AS_CLASSTYPE" />
+          <ScalarProperty Name="AS_STIME" ColumnName="AS_STIME" />
+          <ScalarProperty Name="AS_ETIME" ColumnName="AS_ETIME" />
+          <ScalarProperty Name="AS_HOURS" ColumnName="AS_HOURS" />
+          <ScalarProperty Name="AS_UPDATE" ColumnName="AS_UPDATE" />
+          <ScalarProperty Name="AS_UPDUSER" ColumnName="AS_UPDUSER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AS_SALARY">
+      <EntityTypeMapping TypeName="HYCModel.AS_SALARY">
+        <MappingFragment StoreEntitySet="AS_SALARY">
+          <ScalarProperty Name="AS_USERID" ColumnName="AS_USERID" />
+          <ScalarProperty Name="AS_WORKDAY" ColumnName="AS_WORKDAY" />
+          <ScalarProperty Name="AS_ACTUAL" ColumnName="AS_ACTUAL" />
+          <ScalarProperty Name="AS_BASIC" ColumnName="AS_BASIC" />
+          <ScalarProperty Name="AS_GAP" ColumnName="AS_GAP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AS_WORKSTATISTICS">
+      <EntityTypeMapping TypeName="HYCModel.AS_WORKSTATISTICS">
+        <MappingFragment StoreEntitySet="AS_WORKSTATISTICS">
+          <ScalarProperty Name="as_psn" ColumnName="as_psn" />
+          <ScalarProperty Name="as_workmonth" ColumnName="as_workmonth" />
+          <ScalarProperty Name="as_totaltime" ColumnName="as_totaltime" />
+          <ScalarProperty Name="as_basetime" ColumnName="as_basetime" />
+          <ScalarProperty Name="as_timegap" ColumnName="as_timegap" />
+          <ScalarProperty Name="as_updatetime" ColumnName="as_updatetime" />
+          <ScalarProperty Name="as_updateuser" ColumnName="as_updateuser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HYCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AS_MEMBER">
+          <Key>
+            <PropertyRef Name="AS_PSN" />
+          </Key>
+          <Property Name="AS_PSN" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AS_NAME" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AS_STARTDATE" Type="int" />
+          <Property Name="AS_ENDDATE" Type="int" />
+          <Property Name="AS_SALARY" Type="int" />
+          <Property Name="AS_OFFICEPHONE" Type="varchar" MaxLength="20" />
+          <Property Name="AS_LEAVEDATE" Type="int" />
+          <Property Name="AS_UPDDATE" Type="datetime" />
+          <Property Name="AS_UPDUSER" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'HYC.dbo.AS_SALARY' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="AS_SALARY">
+          <Key>
+            <PropertyRef Name="AS_USERID" />
+          </Key>
+          <Property Name="AS_USERID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AS_WORKDAY" Type="int" />
+          <Property Name="AS_ACTUAL" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AS_BASIC" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AS_GAP" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'HYC.dbo.AS_WORKSTATISTICS' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="AS_WORKSTATISTICS">
+          <Key>
+            <PropertyRef Name="as_psn" />
+          </Key>
+          <Property Name="as_psn" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="as_workmonth" Type="varchar" MaxLength="20" />
+          <Property Name="as_totaltime" Type="int" />
+          <Property Name="as_basetime" Type="int" />
+          <Property Name="as_timegap" Type="int" />
+          <Property Name="as_updatetime" Type="date" />
+          <Property Name="as_updateuser" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="AS_WORKTIME">
+          <Key>
+            <PropertyRef Name="ASS_SN" />
+          </Key>
+          <Property Name="ASS_SN" Type="int" Nullable="false" />
+          <Property Name="AS_PSN" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AS_USERID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AS_DATE" Type="int" Nullable="false" />
+          <Property Name="AS_CLASSTYPE" Type="varchar" MaxLength="1" />
+          <Property Name="AS_STIME" Type="int" Nullable="false" />
+          <Property Name="AS_ETIME" Type="int" Nullable="false" />
+          <Property Name="AS_HOURS" Type="float" />
+          <Property Name="AS_UPDATE" Type="datetime" />
+          <Property Name="AS_UPDUSER" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityContainer Name="HYCModelStoreContainer">
+          <EntitySet Name="AS_MEMBER" EntityType="Self.AS_MEMBER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AS_WORKTIME" EntityType="Self.AS_WORKTIME" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AS_SALARY" EntityType="Self.AS_SALARY" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AS_SALARY].[AS_USERID] AS [AS_USERID], 
+    [AS_SALARY].[AS_WORKDAY] AS [AS_WORKDAY], 
+    [AS_SALARY].[AS_ACTUAL] AS [AS_ACTUAL], 
+    [AS_SALARY].[AS_BASIC] AS [AS_BASIC], 
+    [AS_SALARY].[AS_GAP] AS [AS_GAP]
+    FROM [dbo].[AS_SALARY] AS [AS_SALARY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AS_WORKSTATISTICS" EntityType="Self.AS_WORKSTATISTICS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AS_WORKSTATISTICS].[as_psn] AS [as_psn], 
+    [AS_WORKSTATISTICS].[as_workmonth] AS [as_workmonth], 
+    [AS_WORKSTATISTICS].[as_totaltime] AS [as_totaltime], 
+    [AS_WORKSTATISTICS].[as_basetime] AS [as_basetime], 
+    [AS_WORKSTATISTICS].[as_timegap] AS [as_timegap], 
+    [AS_WORKSTATISTICS].[as_updatetime] AS [as_updatetime], 
+    [AS_WORKSTATISTICS].[as_updateuser] AS [as_updateuser]
+    FROM [dbo].[AS_WORKSTATISTICS] AS [AS_WORKSTATISTICS]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HYCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AS_MEMBER">
+          <Key>
+            <PropertyRef Name="AS_PSN" />
+          </Key>
+          <Property Name="AS_PSN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AS_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AS_STARTDATE" Type="Int32" />
+          <Property Name="AS_ENDDATE" Type="Int32" />
+          <Property Name="AS_SALARY" Type="Int32" />
+          <Property Name="AS_OFFICEPHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AS_LEAVEDATE" Type="Int32" />
+          <Property Name="AS_UPDDATE" Type="DateTime" Precision="3" />
+          <Property Name="AS_UPDUSER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AS_WORKTIME">
+          <Key>
+            <PropertyRef Name="ASS_SN" />
+          </Key>
+          <Property Name="ASS_SN" Type="Int32" Nullable="false" />
+          <Property Name="AS_PSN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AS_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AS_DATE" Type="Int32" Nullable="false" />
+          <Property Name="AS_CLASSTYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="AS_STIME" Type="Int32" Nullable="false" />
+          <Property Name="AS_ETIME" Type="Int32" Nullable="false" />
+          <Property Name="AS_HOURS" Type="Double" />
+          <Property Name="AS_UPDATE" Type="DateTime" Precision="3" />
+          <Property Name="AS_UPDUSER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AS_SALARY">
+          <Key>
+            <PropertyRef Name="AS_USERID" />
+          </Key>
+          <Property Name="AS_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AS_WORKDAY" Type="Int32" />
+          <Property Name="AS_ACTUAL" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AS_BASIC" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AS_GAP" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="AS_WORKSTATISTICS">
+          <Key>
+            <PropertyRef Name="as_psn" />
+          </Key>
+          <Property Name="as_psn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="as_workmonth" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="as_totaltime" Type="Int32" />
+          <Property Name="as_basetime" Type="Int32" />
+          <Property Name="as_timegap" Type="Int32" />
+          <Property Name="as_updatetime" Type="DateTime" Precision="0" />
+          <Property Name="as_updateuser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="HYCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AS_MEMBER" EntityType="Self.AS_MEMBER" />
+          <EntitySet Name="AS_WORKTIME" EntityType="Self.AS_WORKTIME" />
+          <EntitySet Name="AS_SALARY" EntityType="Self.AS_SALARY" />
+          <EntitySet Name="AS_WORKSTATISTICS" EntityType="Self.AS_WORKSTATISTICS" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HYCModelStoreContainer" CdmEntityContainer="HYCEntities">
+          <EntitySetMapping Name="AS_MEMBER">
+            <EntityTypeMapping TypeName="HYCModel.AS_MEMBER">
+              <MappingFragment StoreEntitySet="AS_MEMBER">
+                <ScalarProperty Name="AS_PSN" ColumnName="AS_PSN" />
+                <ScalarProperty Name="AS_NAME" ColumnName="AS_NAME" />
+                <ScalarProperty Name="AS_STARTDATE" ColumnName="AS_STARTDATE" />
+                <ScalarProperty Name="AS_ENDDATE" ColumnName="AS_ENDDATE" />
+                <ScalarProperty Name="AS_SALARY" ColumnName="AS_SALARY" />
+                <ScalarProperty Name="AS_OFFICEPHONE" ColumnName="AS_OFFICEPHONE" />
+                <ScalarProperty Name="AS_LEAVEDATE" ColumnName="AS_LEAVEDATE" />
+                <ScalarProperty Name="AS_UPDDATE" ColumnName="AS_UPDDATE" />
+                <ScalarProperty Name="AS_UPDUSER" ColumnName="AS_UPDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AS_WORKTIME">
+            <EntityTypeMapping TypeName="HYCModel.AS_WORKTIME">
+              <MappingFragment StoreEntitySet="AS_WORKTIME">
+                <ScalarProperty Name="ASS_SN" ColumnName="ASS_SN" />
+                <ScalarProperty Name="AS_PSN" ColumnName="AS_PSN" />
+                <ScalarProperty Name="AS_USERID" ColumnName="AS_USERID" />
+                <ScalarProperty Name="AS_DATE" ColumnName="AS_DATE" />
+                <ScalarProperty Name="AS_CLASSTYPE" ColumnName="AS_CLASSTYPE" />
+                <ScalarProperty Name="AS_STIME" ColumnName="AS_STIME" />
+                <ScalarProperty Name="AS_ETIME" ColumnName="AS_ETIME" />
+                <ScalarProperty Name="AS_HOURS" ColumnName="AS_HOURS" />
+                <ScalarProperty Name="AS_UPDATE" ColumnName="AS_UPDATE" />
+                <ScalarProperty Name="AS_UPDUSER" ColumnName="AS_UPDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AS_SALARY">
+            <EntityTypeMapping TypeName="HYCModel.AS_SALARY">
+              <MappingFragment StoreEntitySet="AS_SALARY">
+                <ScalarProperty Name="AS_USERID" ColumnName="AS_USERID" />
+                <ScalarProperty Name="AS_WORKDAY" ColumnName="AS_WORKDAY" />
+                <ScalarProperty Name="AS_ACTUAL" ColumnName="AS_ACTUAL" />
+                <ScalarProperty Name="AS_BASIC" ColumnName="AS_BASIC" />
+                <ScalarProperty Name="AS_GAP" ColumnName="AS_GAP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AS_WORKSTATISTICS">
+            <EntityTypeMapping TypeName="HYCModel.AS_WORKSTATISTICS">
+              <MappingFragment StoreEntitySet="AS_WORKSTATISTICS">
+                <ScalarProperty Name="as_psn" ColumnName="as_psn" />
+                <ScalarProperty Name="as_workmonth" ColumnName="as_workmonth" />
+                <ScalarProperty Name="as_totaltime" ColumnName="as_totaltime" />
+                <ScalarProperty Name="as_basetime" ColumnName="as_basetime" />
+                <ScalarProperty Name="as_timegap" ColumnName="as_timegap" />
+                <ScalarProperty Name="as_updatetime" ColumnName="as_updatetime" />
+                <ScalarProperty Name="as_updateuser" ColumnName="as_updateuser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

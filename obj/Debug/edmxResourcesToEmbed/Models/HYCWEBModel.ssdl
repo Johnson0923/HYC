@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HYCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AS_MEMBER">
+    <Key>
+      <PropertyRef Name="AS_PSN" />
+    </Key>
+    <Property Name="AS_PSN" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AS_NAME" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AS_STARTDATE" Type="int" />
+    <Property Name="AS_ENDDATE" Type="int" />
+    <Property Name="AS_SALARY" Type="int" />
+    <Property Name="AS_OFFICEPHONE" Type="varchar" MaxLength="20" />
+    <Property Name="AS_LEAVEDATE" Type="int" />
+    <Property Name="AS_UPDDATE" Type="datetime" />
+    <Property Name="AS_UPDUSER" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'HYC.dbo.AS_SALARY' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="AS_SALARY">
+    <Key>
+      <PropertyRef Name="AS_USERID" />
+    </Key>
+    <Property Name="AS_USERID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AS_WORKDAY" Type="int" />
+    <Property Name="AS_ACTUAL" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AS_BASIC" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AS_GAP" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="AS_WORKTIME">
+    <Key>
+      <PropertyRef Name="ASS_SN" />
+    </Key>
+    <Property Name="ASS_SN" Type="int" Nullable="false" />
+    <Property Name="AS_PSN" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AS_USERID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AS_DATE" Type="int" Nullable="false" />
+    <Property Name="AS_CLASSTYPE" Type="varchar" MaxLength="1" />
+    <Property Name="AS_STIME" Type="int" Nullable="false" />
+    <Property Name="AS_ETIME" Type="int" Nullable="false" />
+    <Property Name="AS_HOURS" Type="float" />
+    <Property Name="AS_UPDATE" Type="datetime" />
+    <Property Name="AS_UPDUSER" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityContainer Name="HYCModelStoreContainer">
+    <EntitySet Name="AS_MEMBER" EntityType="Self.AS_MEMBER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AS_WORKTIME" EntityType="Self.AS_WORKTIME" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AS_SALARY" EntityType="Self.AS_SALARY" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AS_SALARY].[AS_USERID] AS [AS_USERID], 
+    [AS_SALARY].[AS_WORKDAY] AS [AS_WORKDAY], 
+    [AS_SALARY].[AS_ACTUAL] AS [AS_ACTUAL], 
+    [AS_SALARY].[AS_BASIC] AS [AS_BASIC], 
+    [AS_SALARY].[AS_GAP] AS [AS_GAP]
+    FROM [dbo].[AS_SALARY] AS [AS_SALARY]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
